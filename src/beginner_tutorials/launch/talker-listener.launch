@@ -1,0 +1,6 @@
+<launch>
+    <node name="$(anon talker)" pkg="beginner_tutorials" type="talker.py" />
+    <node name="$(anon listener)" pkg="beginner_tutorials" type="listener.py" />
+    <node name="$(anon controller)" pkg="beginner_tutorials" type="controller.py"/>
+    <node name="$(anon AI_service)" pkg="beginner_tutorials" type="AI_service.py"/>
+</launch>

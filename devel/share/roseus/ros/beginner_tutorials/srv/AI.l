@@ -1,0 +1,227 @@
+;; Auto-generated. Do not edit!
+
+
+(when (boundp 'beginner_tutorials::AI)
+  (if (not (find-package "BEGINNER_TUTORIALS"))
+    (make-package "BEGINNER_TUTORIALS"))
+  (shadow 'AI (find-package "BEGINNER_TUTORIALS")))
+(unless (find-package "BEGINNER_TUTORIALS::AI")
+  (make-package "BEGINNER_TUTORIALS::AI"))
+(unless (find-package "BEGINNER_TUTORIALS::AIREQUEST")
+  (make-package "BEGINNER_TUTORIALS::AIREQUEST"))
+(unless (find-package "BEGINNER_TUTORIALS::AIRESPONSE")
+  (make-package "BEGINNER_TUTORIALS::AIRESPONSE"))
+
+(in-package "ROS")
+
+(if (not (find-package "SENSOR_MSGS"))
+  (ros::roseus-add-msgs "sensor_msgs"))
+
+
+
+
+(defclass beginner_tutorials::AIRequest
+  :super ros::object
+  :slots (_image ))
+
+(defmethod beginner_tutorials::AIRequest
+  (:init
+   (&key
+    ((:image __image) (instance sensor_msgs::Image :init))
+    )
+   (send-super :init)
+   (setq _image __image)
+   self)
+  (:image
+   (&rest __image)
+   (if (keywordp (car __image))
+       (send* _image __image)
+     (progn
+       (if __image (setq _image (car __image)))
+       _image)))
+  (:serialization-length
+   ()
+   (+
+    ;; sensor_msgs/Image _image
+    (send _image :serialization-length)
+    ))
+  (:serialize
+   (&optional strm)
+   (let ((s (if strm strm
+              (make-string-output-stream (send self :serialization-length)))))
+     ;; sensor_msgs/Image _image
+       (send _image :serialize s)
+     ;;
+     (if (null strm) (get-output-stream-string s))))
+  (:deserialize
+   (buf &optional (ptr- 0))
+   ;; sensor_msgs/Image _image
+     (send _image :deserialize buf ptr-) (incf ptr- (send _image :serialization-length))
+   ;;
+   self)
+  )
+
+(defclass beginner_tutorials::AIResponse
+  :super ros::object
+  :slots (_result ))
+
+(defmethod beginner_tutorials::AIResponse
+  (:init
+   (&key
+    ((:result __result) 0)
+    )
+   (send-super :init)
+   (setq _result (round __result))
+   self)
+  (:result
+   (&optional __result)
+   (if __result (setq _result __result)) _result)
+  (:serialization-length
+   ()
+   (+
+    ;; int32 _result
+    4
+    ))
+  (:serialize
+   (&optional strm)
+   (let ((s (if strm strm
+              (make-string-output-stream (send self :serialization-length)))))
+     ;; int32 _result
+       (write-long _result s)
+     ;;
+     (if (null strm) (get-output-stream-string s))))
+  (:deserialize
+   (buf &optional (ptr- 0))
+   ;; int32 _result
+     (setq _result (sys::peek buf ptr- :integer)) (incf ptr- 4)
+   ;;
+   self)
+  )
+
+(defclass beginner_tutorials::AI
+  :super ros::object
+  :slots ())
+
+(setf (get beginner_tutorials::AI :md5sum-) "b275fc781a7750fca95a098877b3f1f6")
+(setf (get beginner_tutorials::AI :datatype-) "beginner_tutorials/AI")
+(setf (get beginner_tutorials::AI :request) beginner_tutorials::AIRequest)
+(setf (get beginner_tutorials::AI :response) beginner_tutorials::AIResponse)
+
+(defmethod beginner_tutorials::AIRequest
+  (:response () (instance beginner_tutorials::AIResponse :init)))
+
+(setf (get beginner_tutorials::AIRequest :md5sum-) "b275fc781a7750fca95a098877b3f1f6")
+(setf (get beginner_tutorials::AIRequest :datatype-) "beginner_tutorials/AIRequest")
+(setf (get beginner_tutorials::AIRequest :definition-)
+      "sensor_msgs/Image image
+
+================================================================================
+MSG: sensor_msgs/Image
+# This message contains an uncompressed image
+# (0, 0) is at top-left corner of image
+#
+
+Header header        # Header timestamp should be acquisition time of image
+                     # Header frame_id should be optical frame of camera
+                     # origin of frame should be optical center of camera
+                     # +x should point to the right in the image
+                     # +y should point down in the image
+                     # +z should point into to plane of the image
+                     # If the frame_id here and the frame_id of the CameraInfo
+                     # message associated with the image conflict
+                     # the behavior is undefined
+
+uint32 height         # image height, that is, number of rows
+uint32 width          # image width, that is, number of columns
+
+# The legal values for encoding are in file src/image_encodings.cpp
+# If you want to standardize a new string format, join
+# ros-users@lists.sourceforge.net and send an email proposing a new encoding.
+
+string encoding       # Encoding of pixels -- channel meaning, ordering, size
+                      # taken from the list of strings in include/sensor_msgs/image_encodings.h
+
+uint8 is_bigendian    # is this data bigendian?
+uint32 step           # Full row length in bytes
+uint8[] data          # actual matrix data, size is (step * rows)
+
+================================================================================
+MSG: std_msgs/Header
+# Standard metadata for higher-level stamped data types.
+# This is generally used to communicate timestamped data 
+# in a particular coordinate frame.
+# 
+# sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')
+# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+string frame_id
+---
+int32 result
+
+")
+
+(setf (get beginner_tutorials::AIResponse :md5sum-) "b275fc781a7750fca95a098877b3f1f6")
+(setf (get beginner_tutorials::AIResponse :datatype-) "beginner_tutorials/AIResponse")
+(setf (get beginner_tutorials::AIResponse :definition-)
+      "sensor_msgs/Image image
+
+================================================================================
+MSG: sensor_msgs/Image
+# This message contains an uncompressed image
+# (0, 0) is at top-left corner of image
+#
+
+Header header        # Header timestamp should be acquisition time of image
+                     # Header frame_id should be optical frame of camera
+                     # origin of frame should be optical center of camera
+                     # +x should point to the right in the image
+                     # +y should point down in the image
+                     # +z should point into to plane of the image
+                     # If the frame_id here and the frame_id of the CameraInfo
+                     # message associated with the image conflict
+                     # the behavior is undefined
+
+uint32 height         # image height, that is, number of rows
+uint32 width          # image width, that is, number of columns
+
+# The legal values for encoding are in file src/image_encodings.cpp
+# If you want to standardize a new string format, join
+# ros-users@lists.sourceforge.net and send an email proposing a new encoding.
+
+string encoding       # Encoding of pixels -- channel meaning, ordering, size
+                      # taken from the list of strings in include/sensor_msgs/image_encodings.h
+
+uint8 is_bigendian    # is this data bigendian?
+uint32 step           # Full row length in bytes
+uint8[] data          # actual matrix data, size is (step * rows)
+
+================================================================================
+MSG: std_msgs/Header
+# Standard metadata for higher-level stamped data types.
+# This is generally used to communicate timestamped data 
+# in a particular coordinate frame.
+# 
+# sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')
+# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+string frame_id
+---
+int32 result
+
+")
+
+
+
+(provide :beginner_tutorials/AI "b275fc781a7750fca95a098877b3f1f6")
+
+
