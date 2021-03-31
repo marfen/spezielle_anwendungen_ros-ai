@@ -3,21 +3,32 @@
 from __future__ import print_function
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
+import torch as t
 
 from beginner_tutorials.srv import AI, AIResponse
 import rospy
+import rospkg
 
 bridge = CvBridge()
 
 def predictNumberFromImage(imgMsg):
 
-    img = bridge.imgmsg_to_cv2(imgMsg, encoding="mono8")
+    img = bridge.imgmsg_to_cv2(imgMsg.image)
 
-    predection = 7 #hardcoded example
+    #model1_path = rospack.get_path('beginner_tutorials') + '/pytorch_models/Model1'
+    #model = Model1()
+    #model.load_state_dict(t.load(model1_path))
 
-    #load model here and do prediction
+    #model2_path = rospack.get_path('beginner_tutorials') + '/pytorch_models/Model2'
+    #model = Model2()
+    #model.load_state_dict(t.load(model2_path))
 
-    return predection
+    #model.eval()
+
+    #predection = model.predict()
+    prediction = 7
+
+    return prediction
 
 
 def prediction_server():
