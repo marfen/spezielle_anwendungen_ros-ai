@@ -15,12 +15,12 @@ from beginner_tutorials.srv import *
 bridge = CvBridge()
 
 
-def prediction_service_client(img):
+def prediction_service_client(imageMsg):
     rospy.wait_for_service('number_prediction_service')
     try:
         number_prediction_service = rospy.ServiceProxy('number_prediction_service', AI)
-        resp1 = number_prediction_service(img)
-        return resp1.result
+        response = number_prediction_service(imageMsg)
+        return response.result
     except rospy.ServiceException as e:
         print("Sevice call failes: %s" % e)
 
@@ -28,7 +28,7 @@ def prediction_service_client(img):
 def callback(img_msg, int_with_header):
     # image to cv2
     img = bridge.imgmsg_to_cv2(img_msg)
-    trueInt = int_with_header
+    trueInt = int_with_header.data
 
     #save pairs in dict
     imgIntPair = {
@@ -37,11 +37,15 @@ def callback(img_msg, int_with_header):
     }
 
     imageMsg = bridge.cv2_to_imgmsg(img)
-    prediction_service_client(imageMsg)
+    prediction = prediction_service_client(imageMsg)
 
+    if imgIntPair.trueInt == prediction:
+        print("prediction right")
+    else:
+        print("prediction wrong")
 
     # prints size of the image
-    rospy.loginfo(np.shape(img))
+    rospy.loginfo(np.shape(imageMsg))
 
     # rospy.loginfo(intMsg)
     # rospy.loginfo(int_with_header.data)

@@ -21,9 +21,6 @@ def callback(ImageMsg):
     # make image grayscaled
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    # make it B/W
-    (thresh, img) = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)  # Image is turned into an black and white image
-
     # publish image to topic processed image
     imgPubNext = rospy.Publisher('processedImage', Image, queue_size=1)
 

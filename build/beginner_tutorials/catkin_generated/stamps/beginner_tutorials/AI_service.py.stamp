@@ -9,12 +9,19 @@ from beginner_tutorials.srv import AI, AIResponse
 import rospy
 import rospkg
 
+
 bridge = CvBridge()
 
 def predictNumberFromImage(imgMsg):
 
+    rospack = rospkg.RosPack()
+
     img = bridge.imgmsg_to_cv2(imgMsg.image)
 
+    #alles Auskommentiert wegen Problemen beim Importieren der Models
+
+
+    # zum wechseln eine der beiden auskommentieren
     #model1_path = rospack.get_path('beginner_tutorials') + '/pytorch_models/Model1'
     #model = Model1()
     #model.load_state_dict(t.load(model1_path))
@@ -26,9 +33,9 @@ def predictNumberFromImage(imgMsg):
     #model.eval()
 
     #predection = model.predict()
-    prediction = 7
 
-    return prediction
+
+    #return prediction
 
 
 def prediction_server():

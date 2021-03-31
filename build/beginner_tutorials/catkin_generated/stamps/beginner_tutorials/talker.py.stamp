@@ -7,7 +7,9 @@ from beginner_tutorials.msg import IntWithHeader
 from cv_bridge import CvBridge
 import cv2
 import rospkg
+import random
 
+imagepick = random.randint(0, 9)
 
 def talker():
     # initialize cvbridge
@@ -19,10 +21,31 @@ def talker():
     #publisher integer topic
     intPub = rospy.Publisher('integer', IntWithHeader, queue_size=1)
 
+    imagepick = random.randint(0,9)
     # load image
     rospack = rospkg.RosPack()
     image_path = rospack.get_path('beginner_tutorials') + '/mnist/'
-    img = cv2.imread(image_path + 'mnist_0.png')
+
+    if imagepick == 0:
+        img = cv2.imread(image_path + 'mnist_0.png')
+    elif imagepick == 1:
+        img = cv2.imread(image_path + 'mnist_1.png')
+    elif imagepick == 2:
+        img = cv2.imread(image_path + 'mnist_2.png')
+    elif imagepick == 3:
+        img = cv2.imread(image_path + 'mnist_3.png')
+    elif imagepick == 4:
+        img = cv2.imread(image_path + 'mnist_4.png')
+    elif imagepick == 5:
+        img = cv2.imread(image_path + 'mnist_5.png')
+    elif imagepick == 6:
+        img = cv2.imread(image_path + 'mnist_6.png')
+    elif imagepick == 7:
+        img = cv2.imread(image_path + 'mnist_7.png')
+    elif imagepick == 8:
+        img = cv2.imread(image_path + 'mnist_8.png')
+    elif imagepick == 9:
+        img = cv2.imread(image_path + 'mnist_9.png')
 
 
     rospy.init_node('talker', anonymous=True)
@@ -36,7 +59,7 @@ def talker():
 
         #create int message
         intMsg = IntWithHeader()
-        intMsg.data = 7
+        intMsg.data = imagepick
 
         #rospy.loginfo(intMsg)
 
