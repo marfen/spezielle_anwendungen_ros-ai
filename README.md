@@ -37,6 +37,9 @@ Nachdem das Repository gecloned wurde, müssen zunächst die Dependencies instal
 
 > pip install - requirements.txt
 
+Je nachdem welches Model trainiert werden soll (Sigmoid oder ReLu) kann dies in main.py ab zeile 47 (aus)kommentiert <br>
+werden, und ab Zeile 72 die entsprechende Persistierung des Models.
+
 Anschließend kann das Training gestartet werden 
 
 > python main.py
@@ -48,6 +51,8 @@ Die fertig trainierte Models werden nun im Ordner "persistent_models" als .pth a
 
 Zum Benutzen der trainierten Models, müssen die im vorherigen Schritt erstellten und gespeicherten Models <br>
 nun in diesem Repository unter "src/beginner_tutorials/pytorch_models/trained_models" abgelegt werden <br>
+Je nachdem welches Model verwendet werden soll, kann dies dementsprechend im AI_service ab Zeile 26 <br>
+(aus)kommentiert werden.
 
 ### ros starten
 
@@ -323,17 +328,35 @@ auf 0. Der Output der nun auf 1 steht ist das Ergebnis der Klassifizierung.
 
 Das bisher erstellte Model ist noch nicht optimiert und bildet ein quasi leeres CNN (Convoltional Neural Network) <br>
 dass im nächsten Schritt noch Trainiert werden muss.
-    
-### Loss Function
-    NLL-Loss
+
+Das Training ist ein Prozess in dem versucht wird die Gewichte so zu optimieren dass der bestmögliche Output <br>
+erreicht wird. Ziel ist es diejenigen Gewichte zu finden die den Input bestmöglich auf die Klassen des Outputs <br>
+abbilden.
+
 ### Optimizer
 
-    SGD
+Die Gewichte werden unter Verwendung sogenannter optimization Algorithm geupdated, in diesem Fall wird SGD  <br>
+- Stochastic Gradient Descent verwendet. Ziel dieser Optimierung ist es die Gewichte des Models so zu ändern dass <br>
+das Ergebnis der Loss Function möglichst nah an den Minimalwert gebracht wird.
   
+Loss beschreibt die Differenz zwischen der Vorhersage des Netzes, welche in Wahrscheinlichkeiten angegeben werden, <br>
+und des tatsächlichen Labels.
+
+ 
 ## vergleich unterschiedlicher Models
 
 ### Model1 mit Sigmoid Activation Function
 
+1 Epoche Training: Average loss: 0.0255, Accuracy: 9141/10000 (91%)
+2 Epochen Training: Average loss: 0.0243, Accuracy: 9441/10000 (94%)
+3 Epochen Training: Average loss: 0.0239, Accuracy: 9622/10000 (96%)
+4 Epochen Training: Average loss: 0.0237, Accuracy: 9691/10000 (97%)
+5 Epochen Training: Average loss: 0.0235, Accuracy: 9759/10000 (98%)
+
 ### Model2 mit ReLu Activation Function
 
-
+1 Epoche Training: Average loss: 0.0014, Accuracy: 9737/10000 (97%)
+2 Epochen Training: Average loss: 0.0008, Accuracy: 9831/10000 (98%)
+3 Epochen Training: Average loss: 0.0020, Accuracy: 9697/10000 (97%)
+4 Epochen Training: Average loss: 0.0008, Accuracy: 9851/10000 (99%)
+5 Epochen Training: Average loss: 0.0008, Accuracy: 9857/10000 (99%)

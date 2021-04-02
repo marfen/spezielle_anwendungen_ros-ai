@@ -22,8 +22,8 @@ class Model1(Module):
         x = F.max_pool2d(x, 2)
 
         x = x.view(-1, 320)                #ignoriert 1. Dimension und legt 320 pixel nebeneinander
-        x = F.sigmoid(self.fc1(x))
-        x = F.sigmoid(self.fc2(x))
+        x = t.sigmoid(self.fc1(x))
+        x = t.sigmoid(self.fc2(x))
         return F.log_softmax(x, dim=1)             # höchster output 1, rest 0 (klassifizierung)
 
 

@@ -8,6 +8,8 @@ import torch as t
 from beginner_tutorials.srv import AI, AIResponse
 import rospy
 import rospkg
+#from beginner_tutorials.pytorch_models.Model1 import Model1
+#from pytorch_models.Model2 import Model2
 
 
 bridge = CvBridge()
@@ -32,7 +34,7 @@ def predictNumberFromImage(imgMsg):
 
     #model.eval()
 
-    #predection = model.predict()
+    #prediction = model.predict()
 
 
     #return prediction

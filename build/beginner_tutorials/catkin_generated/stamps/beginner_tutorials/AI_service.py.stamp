@@ -8,6 +8,7 @@ import torch as t
 from beginner_tutorials.srv import AI, AIResponse
 import rospy
 import rospkg
+from pytorch_models.Model1 import Model1
 
 
 bridge = CvBridge()
@@ -22,20 +23,20 @@ def predictNumberFromImage(imgMsg):
 
 
     # zum wechseln eine der beiden auskommentieren
-    #model1_path = rospack.get_path('beginner_tutorials') + '/pytorch_models/Model1'
-    #model = Model1()
-    #model.load_state_dict(t.load(model1_path))
+    model1_path = rospack.get_path('beginner_tutorials') + '/pytorch_models/Model1'
+    model = Model1()
+    model.load_state_dict(t.load(model1_path))
 
     #model2_path = rospack.get_path('beginner_tutorials') + '/pytorch_models/Model2'
     #model = Model2()
     #model.load_state_dict(t.load(model2_path))
 
-    #model.eval()
+    model.eval()
 
-    #predection = model.predict()
+    prediction = model.predict()
 
 
-    #return prediction
+    return prediction
 
 
 def prediction_server():

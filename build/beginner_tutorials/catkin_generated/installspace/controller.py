@@ -39,10 +39,10 @@ def callback(img_msg, int_with_header):
     imageMsg = bridge.cv2_to_imgmsg(img)
     prediction = prediction_service_client(imageMsg)
 
-    if imgIntPair.trueInt == prediction:
-        print("prediction right")
-    else:
-        print("prediction wrong")
+    #if imgIntPair.trueInt == prediction:
+    #    print("prediction right")
+    #else:
+    #    print("prediction wrong")
 
     # prints size of the image
     rospy.loginfo(np.shape(imageMsg))
